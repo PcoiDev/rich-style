@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "styler"
+version = "1.0"
+
+description = "A Python library for creating and applying full-color, linear, and circular gradients to text with easy color management."
+authors = ["PcoiDev"]
+
+readme = "README.md"
+license = "MIT"
+
+keywords = ["python", "color", "colors", "easy", "cmd", "app", "manage", "text", "colour", "ansi", "terminal", "gradient", "gradients", "bold", "italic", "underscore", "command", "commands"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Operating System :: Unix",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: Microsoft :: Windows",
+]
+
+[tool.poetry.dependencies]
+python = ">=3.6"
+typing = ">=3.7.4.3"
+dataclasses = ">=0.6"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
