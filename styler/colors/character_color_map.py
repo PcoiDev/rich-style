@@ -7,6 +7,7 @@ def character_color_map(
     char_colors: Dict[str, Union[color, gradient]], 
     default_color: Optional[Union[color, gradient]] = None
 ) -> Callable[[str], str]:
+    """Creates a function that applies character-specific colors to a given text."""
     normalized_colors = {}
     
     for char, colorizer in char_colors.items():
@@ -20,6 +21,7 @@ def character_color_map(
             normalized_colors[char] = colorizer
 
     def color_text(text: str) -> str:
+        """Applies the character-specific colors to the provided text."""
         if not text:
             return text
         

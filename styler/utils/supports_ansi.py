@@ -1,10 +1,10 @@
-from os import environ
 from sys import platform, stdout
+from functools import lru_cache
+from os import environ
 
+@lru_cache(maxsize=None)
 def supports_ansi() -> bool:
-    """
-    Detects if the current terminal likely supports ANSI escape codes.
-    """
+    """Detects if the current terminal likely supports ANSI escape codes."""
 
     if environ.get('NO_COLOR'):
         return False
