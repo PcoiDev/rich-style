@@ -23,6 +23,7 @@ from .styles.underline import underline
 from .utils.supports_ansi import supports_ansi
 
 ## prints
+from .utils.prints.debug import debug
 from .utils.prints.error import error
 from .utils.prints.info import info
 from .utils.prints.mutable import mutable_print
@@ -49,6 +50,7 @@ __init__ = [
 
     "supports_ansi",
 
+    "debug",
     "error",
     "info",
     "mutable_print",

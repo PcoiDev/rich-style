@@ -1,10 +1,12 @@
 from ...core.combine_text import combine_text
 from ...colors.presets import presets
+from ...styles.bold import bold
 
-_WARNING_COLOR = presets.orange
+_WARN_COLOR = presets.bright_orange
 
 def warn(*text: str) -> None:
-    """Prints a warning message in yellow color."""
+    """Prints an warning message."""
 
     combined_text = combine_text(*text)
-    print(_WARNING_COLOR(f"⚠︎ {combined_text}"))
+    print(bold(f"{_WARN_COLOR("WARN")} {combined_text}"))
+    

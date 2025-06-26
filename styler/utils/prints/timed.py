@@ -1,6 +1,7 @@
 from ...colors.character_color_map import character_color_map
 from ...core.combine_text import combine_text
 from ...colors.presets import presets
+from ...styles.bold import bold
 
 from datetime import datetime
 

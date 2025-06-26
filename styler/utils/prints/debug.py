@@ -2,11 +2,11 @@ from ...core.combine_text import combine_text
 from ...colors.presets import presets
 from ...styles.bold import bold
 
-_ERROR_COLOR = presets.red
+_DEBUG_COLOR = presets.yellow
 
-def error(*text: str) -> None:
-    """Prints an error message."""
+def debug(*text: str) -> None:
+    """Prints a debug message."""
 
     combined_text = combine_text(*text)
-    print(bold(f"{_ERROR_COLOR("ERRO")} {combined_text}"))
+    print(bold(f"{_DEBUG_COLOR("DEBU")} {combined_text}"))
     
