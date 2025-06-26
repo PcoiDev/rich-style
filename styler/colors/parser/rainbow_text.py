@@ -24,4 +24,4 @@ _GRADIENT_COLOR = gradient(
 def rainbow_text(*text: str) -> str:
     """Returns a rainbow-colored text string."""
     combined_text = combine_text(*text)
-    return _GRADIENT_COLOR(combined_text, layer=layers.FOREGROUND)
+    return _GRADIENT_COLOR(combined_text, layer=layers.TEXT)

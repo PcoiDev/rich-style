@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from ..enums.layers import layers
 
 _ANSI_TEMPLATE = {
-    layers.FOREGROUND: "\033[38;2;{r};{g};{b}m{{}}\033[0m",
+    layers.TEXT: "\033[38;2;{r};{g};{b}m{{}}\033[0m",
     layers.BACKGROUND: "\033[48;2;{r};{g};{b}m{{}}\033[0m",
     layers.FULL: "\033[38;2;{r};{g};{b};48;2;{r};{g};{b}m{{}}\033[0m"
 }
@@ -37,7 +37,7 @@ class color:
         """Return the color in hexadecimal format."""
         return f"#{self.r:02x}{self.g:02x}{self.b:02x}"
 
-    def to_template(self, layer: layers = layers.FOREGROUND) -> str:
+    def to_template(self, layer: layers = layers.TEXT) -> str:
         """
         Return an ANSI escape code template for the color.
         The template can be used to format text with the specified color.
@@ -47,7 +47,7 @@ class color:
 
         return _ANSI_TEMPLATE[layer].format(r=self.r, g=self.g, b=self.b)
 
-    def __call__(self, text: str, layer: layers = layers.FOREGROUND) -> str:
+    def __call__(self, text: str, layer: layers = layers.TEXT) -> str:
         """Applies the ANSI color code to the given text for the specified layer."""
         template = self.to_template(layer)
         return template.format(text)

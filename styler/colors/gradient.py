@@ -93,7 +93,7 @@ class gradient:
             
         return self.colors[positions[0]] 
     
-    def __call__(self, text: str, layer: layers = layers.FOREGROUND) -> str:
+    def __call__(self, text: str, layer: layers = layers.TEXT) -> str:
         """Applies the gradient to the given text."""
         if not text:
             return text
