@@ -1,4 +1,4 @@
-# styler
+# rich-style
 
 A Python library for creating and applying full-color, linear, and circular gradients to text with easy color management. Includes utilities for ANSI styling, colored prints, and more.
 
@@ -14,21 +14,16 @@ A Python library for creating and applying full-color, linear, and circular grad
 ## Installation
 
 ```sh
-pip install .
-```
-
-or with [Poetry](https://python-poetry.org):
-```sh
-poetry install
+pip install richstyle
 ```
 
 ## Usage
 
 Basic Styling
 
-from styler import bold, italic, underline, strikethrough
-
 ```py
+from richstyle import bold, italic, underline, strikethrough
+
 print(bold("Bold text"))
 print(italic("Italic text"))
 print(underline("Underlined text"))
@@ -38,7 +33,8 @@ print(strikethrough("Strikethrough text"))
 Bullet Lists
 
 ```py
-from styler import bullet_list, bold
+from richstyle import bullet_list, bold
+
 tasks = [
     "Complete report",
     "Send email to client",
@@ -52,7 +48,7 @@ print(bullet_list(*tasks))
 Colors and Gradients
 
 ```py
-from styler import presets, foreground, background
+from richstyle import presets, foreground, background
 
 print(foreground(presets.red, "Red text"))
 print(background(presets.blue, "Text with blue background"))
@@ -61,7 +57,7 @@ print(background(presets.blue, "Text with blue background"))
 Colors and Gradients
 
 ```py
-from styler import presets, foreground, background
+from richstyle import presets, foreground, background
 
 print(foreground(presets.red, "Red text"))
 print(background(presets.blue, "Text with blue background"))
@@ -70,14 +66,14 @@ print(background(presets.blue, "Text with blue background"))
 Rainbow Text
 
 ```py
-from styler import rainbow_text
+from richstyle import rainbow_text
 print(rainbow_text("This is a rainbow text message."))
 ```
 
 Utility Prints
 
 ```py
-from styler import info, success, warn, error, timed_print
+from richstyle import info, success, warn, error, timed_print
 
 info("This is an informational message.")
 success("This is a success message.")
@@ -88,7 +84,7 @@ timed_print("This is a timed print message.")
 
 Mutable Print
 ```py
-from styler import mutable_print
+from richstyle import mutable_print
 from time import sleep
 
 mutable = mutable_print("Loading")

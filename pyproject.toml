@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "styler"
+name = "rich-style"
 version = "1.0"
 
 description = "A Python library for creating and applying full-color, linear, and circular gradients to text with easy color management."

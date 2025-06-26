@@ -9,7 +9,7 @@ on:
       - "[0-9]+.[0-9]+.[0-9]+rc[0-9]+"
 
 env:
-  PACKAGE_NAME: "styler"
+  PACKAGE_NAME: "rich-style"
   OWNER: "PcoiDev"
 
 jobs:
