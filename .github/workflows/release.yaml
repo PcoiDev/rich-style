@@ -100,11 +100,11 @@ jobs:
     needs: [setup_and_build, details]
     runs-on: ubuntu-latest
     environment:
-      # CRITICAL FIX 1: Change environment name to match PyPI's Trusted Publisher configuration
-      # Based on your output: "Environment name: pypi"
-      name: pypi
+      # This MUST match the Environment Name on PyPI's Trusted Publisher setup
+      name: pypi 
     permissions:
-      id-token: write # This is essential for Trusted Publishers
+      # This is crucial for Trusted Publishers
+      id-token: write 
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v4
@@ -119,10 +119,9 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: __token__
-          # CRITICAL FIX 2: REMOVE the password when using Trusted Publishers.
-          # The id-token permission handles authentication automatically.
-          # password: ${{ secrets.PYPI_API_TOKEN }}
-          attestations: true # Ensure this is set for Trusted Publishers
+          # NO password/API token needed here for Trusted Publishers
+          # password: ${{ secrets.PYPI_API_TOKEN }} 
+          attestations: true # Ensure this is explicitly set for clarity
 
   github_release:
     name: Create GitHub Release
