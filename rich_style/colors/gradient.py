@@ -3,9 +3,6 @@ from typing import Dict, Union, Tuple
 from .color import color
 from ..enums.layers import layers
 from ..enums.gradient_type import gradient_type
-from ..core.combine_text import combine_text
-from .presets import presets
-
 
 def sqrt(n: float, square: float = 2) -> float:
     return pow(n, (1 / square))
