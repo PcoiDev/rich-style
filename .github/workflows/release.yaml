@@ -158,7 +158,7 @@ jobs:
 
       - name: Upload release assets
         env:
-          GITHUB_TOKEN: ${{ secrets.PYPI_API_TOKE }}
+          GITHUB_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
         run: |
           for file in dist/*; do
             echo "Uploading $file to release..."
