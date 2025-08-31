@@ -1,4 +1,4 @@
-from styler import mutable_print
+from rich_style import mutable_print
 from time import sleep
 
 mutable = mutable_print(".")

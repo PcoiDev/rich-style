@@ -1,5 +1,5 @@
-from styler import presets, italic, rainbow_text
-from styler import debug, info, success, timed_print, warn, error
+from rich_style import presets, italic, rainbow_text
+from rich_style import debug, info, success, timed_print, warn, error
 
 print(f"a {italic(presets.red("italic red"))} text")
 

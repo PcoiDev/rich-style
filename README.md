@@ -14,7 +14,7 @@ A Python library for creating and applying full-color, linear, and circular grad
 ## Installation
 
 ```sh
-pip install richstyle
+pip install rich-style
 ```
 
 ## Usage
@@ -22,7 +22,7 @@ pip install richstyle
 Basic Styling
 
 ```py
-from richstyle import bold, italic, underline, strikethrough
+from rich_style import bold, italic, underline, strikethrough
 
 print(bold("Bold text"))
 print(italic("Italic text"))
@@ -33,7 +33,7 @@ print(strikethrough("Strikethrough text"))
 Bullet Lists
 
 ```py
-from richstyle import bullet_list, bold
+from rich_style import bullet_list, bold
 
 tasks = [
     "Complete report",
@@ -48,7 +48,7 @@ print(bullet_list(*tasks))
 Colors and Gradients
 
 ```py
-from richstyle import presets, foreground, background
+from rich_style import presets, foreground, background
 
 print(foreground(presets.red, "Red text"))
 print(background(presets.blue, "Text with blue background"))
@@ -57,7 +57,7 @@ print(background(presets.blue, "Text with blue background"))
 Colors and Gradients
 
 ```py
-from richstyle import presets, foreground, background
+from rich_style import presets, foreground, background
 
 print(foreground(presets.red, "Red text"))
 print(background(presets.blue, "Text with blue background"))
@@ -66,14 +66,14 @@ print(background(presets.blue, "Text with blue background"))
 Rainbow Text
 
 ```py
-from richstyle import rainbow_text
+from rich_style import rainbow_text
 print(rainbow_text("This is a rainbow text message."))
 ```
 
 Utility Prints
 
 ```py
-from richstyle import info, success, warn, error, timed_print
+from rich_style import info, success, warn, error, timed_print
 
 info("This is an informational message.")
 success("This is a success message.")
@@ -84,7 +84,7 @@ timed_print("This is a timed print message.")
 
 Mutable Print
 ```py
-from richstyle import mutable_print
+from rich_style import mutable_print
 from time import sleep
 
 mutable = mutable_print("Loading")

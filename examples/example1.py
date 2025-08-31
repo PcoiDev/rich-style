@@ -1,6 +1,6 @@
-from styler import bold, italic, underline, strikethrough, bullet_list
+from rich_style import bold, italic, underline, strikethrough, bullet_list
 
-print("--- Text Styling Examples (from styler) ---")
+print("--- Text Styling Examples (from rich_style) ---")
 
 # Basic usage
 print(f"This is {bold('important')} information.")
@@ -8,14 +8,14 @@ print(f"This is a {italic('sidebar comment')}.")
 print(f"Please {underline('pay attention')} to this line.")
 print(f"This item is {strikethrough('no longer available')} in stock.")
 
-print("\n--- Combining Styles (from styler) ---")
+print("\n--- Combining Styles (from rich_style) ---")
 
 print(f"This text is {bold(italic('bold and italic'))}.")
 print(f"This text is {italic(underline('italic and underlined'))}.")
 print(f"This text is {bold(strikethrough('bold and struck through'))}.")
 print(f"This text is {underline(bold(italic('all three basic styles')))}.")
 
-print("\n--- Styling within Sentences (from styler) ---")
+print("\n--- Styling within Sentences (from rich_style) ---")
 
 message = f"Thank you for your {bold('support')}. Your {italic('feedback')} is greatly {underline('appreciated')}."
 print(message)
