@@ -10,6 +10,9 @@ from .colors.parser.from_html import from_html
 from .colors.parser.rainbow_text import rainbow_text
 from .colors.parser.random_color import random_color
 
+# enums
+from .enums import gradient_type, layers
+
 # styles
 from .styles.background import background
 from .styles.bold import bold
@@ -37,6 +40,9 @@ __init__ = [
     "gradient",
     "parser",
 
+    "gradient_type",
+    "layers",
+    
     "from_hsl",
     "from_html",
     "rainbow_text",

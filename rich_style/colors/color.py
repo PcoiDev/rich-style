@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from ..enums.layers import layers
+from ..enums import layers
 
 _ANSI_TEMPLATE = {
     layers.TEXT: "\033[38;2;{r};{g};{b}m{{}}\033[39m",

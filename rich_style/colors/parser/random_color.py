@@ -13,4 +13,4 @@ def random_color(colors: Optional[List[Union[color, gradient]]] = None) -> color
     if isinstance(chosen_item, color):
         return chosen_item
     else:
-        return chosen_item.get_color_at(random())
+        return chosen_item.color_at(random())

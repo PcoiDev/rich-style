@@ -1,6 +1,6 @@
 from ..core.style import style
 from ..colors.color import color
-from ..enums.layers import layers
+from ..enums import layers
 
 def background(color: color, *text, force_ansi: bool = False):
     """Applies a foreground color to the given text."""

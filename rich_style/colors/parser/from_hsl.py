@@ -9,9 +9,16 @@ def from_hsl(h: float, s: float, l: float) -> color:
     def hue_rgb(t: float) -> float:
         """Helper function to convert hue to RGB component."""
         t = t % 1
-        if t < 1/6: return p + (q - p) * 6 * t
-        if t < 1/2: return q
-        if t < 2/3: return p + (q - p) * (2/3 - t) * 6
+        
+        if t < 1/6:
+            return p + (q - p) * 6 * t
+        
+        if t < 1/2:
+            return q
+        
+        if t < 2/3:
+            return p + (q - p) * (2/3 - t) * 6
+        
         return p
 
     return color(*(int(hue_rgb(h + i) * 255) for i in (1/3, 0, -1/3)))

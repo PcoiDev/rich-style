@@ -1,6 +1,5 @@
 from ...core.combine_text import combine_text
-from ...enums.gradient_type import gradient_type
-from ...enums.layers import layers
+from ...enums import gradient_type, layers
 from ..gradient import gradient
 from ..presets import presets
 
