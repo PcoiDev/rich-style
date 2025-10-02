@@ -23,10 +23,8 @@ jobs:
         id: extract
         run: |
           TAG_NAME="${{ github.event.release.tag_name }}"
-          # Remove 'v' prefix if present
           VERSION=$(echo "$TAG_NAME" | sed 's/^v//')
           
-          # Check if it's a prerelease (contains alpha, beta, rc, etc.)
           if echo "$VERSION" | grep -qE "(alpha|beta|rc|dev|pre)"; then
             IS_PRERELEASE="true"
           else
@@ -56,7 +54,6 @@ jobs:
           NEW_VERSION="${{ needs.validate-release.outputs.version }}"
           echo "Checking if version $NEW_VERSION exists on PyPI..."
           
-          # Check if the exact version already exists
           HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "https://pypi.org/pypi/${{ env.PACKAGE_NAME }}/$NEW_VERSION/json")
           
           if [ "$HTTP_CODE" = "200" ]; then
@@ -126,7 +123,7 @@ jobs:
       name: pypi
       url: https://pypi.org/p/${{ env.PACKAGE_NAME }}
     permissions:
-      id-token: write  # For trusted publishing
+      id-token: write
     steps:
       - name: Download build artifacts
         uses: actions/download-artifact@v4
@@ -139,17 +136,23 @@ jobs:
           echo "Artifacts to publish:"
           ls -la dist/
 
-      - name: Publish to PyPI
+      - name: Publish to PyPI (Trusted Publishing)
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           print-hash: true
           verbose: true
+          skip-existing: true
 
   create-github-release-assets:
     name: Upload Release Assets
     runs-on: ubuntu-latest
     needs: [validate-release, build-package]
+    permissions:
+      contents: write
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
@@ -158,11 +161,13 @@ jobs:
 
       - name: Upload release assets
         env:
-          GITHUB_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           for file in dist/*; do
-            echo "Uploading $file to release..."
-            gh release upload "${{ github.event.release.tag_name }}" "$file" --clobber
+            if [[ "$file" != *.attestation ]]; then
+              echo "Uploading $file to release..."
+              gh release upload "${{ github.event.release.tag_name }}" "$file" --clobber
+            fi
           done
 
   notify-success:
