@@ -7,12 +7,15 @@ _ANSI_SUPPORTED = supports_ansi()
 @dataclass(slots=True, frozen=True)
 class style:
     template: str
-
     _ansi_supported: bool = field(default=_ANSI_SUPPORTED, init=False, repr=False)
 
     def __call__(self, *text, force_ansi: bool = False) -> str:
         """ Allows the Style instance to be called like a function to format text. """
         return self.format(combine_text(*text), force_ansi)
+    
+    def __add__(self, style2):
+        combined = style2.template.replace("{}", self.template)
+        return style(combined)
     
     def format(self, text: str, force_ansi: bool) -> str:
         """

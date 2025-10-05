@@ -29,7 +29,6 @@ from .utils.supports_ansi import supports_ansi
 from .utils.prints.debug import debug
 from .utils.prints.error import error
 from .utils.prints.info import info
-from .utils.prints.mutable import mutable_print
 from .utils.prints.success import success
 from .utils.prints.timed import timed_print
 from .utils.prints.warn import warn
@@ -59,7 +58,6 @@ __init__ = [
     "debug",
     "error",
     "info",
-    "mutable_print",
     "success",
     "timed_print",
     "warn",

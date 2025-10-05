@@ -46,7 +46,7 @@ class color:
             raise ValueError(f"Unsupported layer for ANSI template: {layer}")
 
         return _ANSI_TEMPLATE[layer].format(r=self.r, g=self.g, b=self.b)
-
+    
     def __call__(self, text: str, layer: layers = layers.TEXT) -> str:
         """Applies the ANSI color code to the given text for the specified layer."""
         template = self.to_template(layer)

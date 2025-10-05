@@ -1,7 +1,7 @@
 from ..core.combine_text import combine_text
 
 _BULLET_TO_TEXT_SPACING = "   "
-_BULLETS = ["●", "○", "⦿"]
+_BULLETS = ["●", "○", "◆", "◇"]
 
 def bullet_list(*text: str, base_indentation_level: int = 0):
     """Formats a list of text items as a bullet list with customizable indentation."""

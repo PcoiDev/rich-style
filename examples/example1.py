@@ -1,6 +1,6 @@
 from rich_style import bold, italic, underline, strikethrough, bullet_list
 
-print("--- Text Styling Examples (from rich_style) ---")
+print("--- Text Styling Examples ---")
 
 # Basic usage
 print(f"This is {bold('important')} information.")
@@ -8,14 +8,19 @@ print(f"This is a {italic('sidebar comment')}.")
 print(f"Please {underline('pay attention')} to this line.")
 print(f"This item is {strikethrough('no longer available')} in stock.")
 
-print("\n--- Combining Styles (from rich_style) ---")
+print("\n--- Combining Styles ---")
 
-print(f"This text is {bold(italic('bold and italic'))}.")
-print(f"This text is {italic(underline('italic and underlined'))}.")
-print(f"This text is {bold(strikethrough('bold and struck through'))}.")
-print(f"This text is {underline(bold(italic('all three basic styles')))}.")
+bold_italic = bold + italic
+italic_underline = italic + underline
+bold_strikethrough = bold + strikethrough
+underline_bold_italic = underline + bold + italic
 
-print("\n--- Styling within Sentences (from rich_style) ---")
+print(f"This text is {bold_italic('bold and italic')}.")
+print(f"This text is {italic_underline('italic and underlined')}.")
+print(f"This text is {bold_strikethrough('bold and struck through')}.")
+print(f"This text is {underline_bold_italic('all three basic styles')}.")
+
+print("\n--- Styling within Sentences ---")
 
 message = f"Thank you for your {bold('support')}. Your {italic('feedback')} is greatly {underline('appreciated')}."
 print(message)
@@ -26,7 +31,7 @@ if item_status == "Available":
 else:
     print(f"Status: {strikethrough(item_status)}")
 
-print("\n--- Styling a List (using bullet_list) ---")
+print("\n--- Styling a List ---")
 
 # Default indentation (level 0)
 tasks = [
