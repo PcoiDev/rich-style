@@ -44,11 +44,6 @@ class gradient:
             pdy = norm_y - self.start[1]
             
             projection = (pdx * dx + pdy * dy) / length_squared
-            
-            # DEBUG PRINT
-            if x == 0 and y in [0, max_y // 2, max_y - 1]:
-                print(f"  -> projection={projection:.3f}, dx={dx}, dy={dy}, pdx={pdx:.3f}, pdy={pdy:.3f}")
-            
             return max(0.0, min(1.0, projection))
         
         else:
