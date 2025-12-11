@@ -2,12 +2,12 @@ from typing import Dict, Union, Optional, Callable
 
 from .color import color
 from .gradient import gradient
+from ..enums import layers
 
 def character_color_map(
     char_colors: Dict[str, Union[color, gradient]], 
     default_color: Optional[Union[color, gradient]] = None
 ) -> Callable[[str], str]:
-    """Creates a function that applies character-specific colors to a given text."""
     normalized_colors = {}
     
     for char, colorizer in char_colors.items():
@@ -21,12 +21,15 @@ def character_color_map(
             normalized_colors[char] = colorizer
 
     def color_text(text: str) -> str:
-        """Applies the character-specific colors to the provided text."""
         if not text:
             return text
         
         lines = text.split('\n')
-        total_lines = len(lines)
+        max_y = len(lines)
+        max_x = max(len(line) for line in lines) if lines else 0
+        
+        if max_x == 0 or max_y == 0:
+            return text
         
         result = []
         for y, line in enumerate(lines):
@@ -39,9 +42,9 @@ def character_color_map(
                     continue
                     
                 if isinstance(colorizer, gradient):
-                    color_factor = y / (total_lines - 1) if total_lines > 1 else 0
-                    color = colorizer.at(color_factor)
-                    line_result.append(color(char))
+                    position_factor = colorizer._get_position_factor(x, y, max_x, max_y)
+                    char_color = colorizer.at(position_factor)
+                    line_result.append(char_color(char, layers.TEXT))
                 else:
                     line_result.append(colorizer(char))
             

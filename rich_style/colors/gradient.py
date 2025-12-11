@@ -16,46 +16,58 @@ class gradient:
         end: Tuple[float, float] = (0.5, 1),
         type: gradient_type = gradient_type.LINEAR
     ):
-        """Initializes a gradient with specified colors, start and end positions, and gradient type."""
         self.colors = {0.0: colors, 1.0: colors} if isinstance(colors, color) else colors
         self.start = start
         self.end = end
         self.type = type
         
     def _get_position_factor(self, x: int, y: int, max_x: int, max_y: int) -> float:
-        """Calculates the position factor based on the x and y coordinates."""
-        if max_x <= 1 and max_y <= 1:
-            return 0.0
+        if max_x <= 1:
+            norm_x = self.start[0]
+        else:
+            norm_x = x / (max_x - 1)
             
-        norm_x = x / (max_x - 1) if max_x > 1 else 0.0
-        norm_y = y / (max_y - 1) if max_y > 1 else 0.0
+        if max_y <= 1:
+            norm_y = self.start[1]
+        else:
+            norm_y = y / (max_y - 1)
         
         if self.type == gradient_type.LINEAR:
             dx = self.end[0] - self.start[0]
             dy = self.end[1] - self.start[1]
+            
+            length_squared = dx * dx + dy * dy
+            if length_squared == 0:
+                return 0.0
+            
             pdx = norm_x - self.start[0]
             pdy = norm_y - self.start[1]
             
-            dot = dx * pdx + dy * pdy
-            mag_squared = dx * dx + dy * dy
+            projection = (pdx * dx + pdy * dy) / length_squared
             
-            if mag_squared == 0:
+            # DEBUG PRINT
+            if x == 0 and y in [0, max_y // 2, max_y - 1]:
+                print(f"  -> projection={projection:.3f}, dx={dx}, dy={dy}, pdx={pdx:.3f}, pdy={pdy:.3f}")
+            
+            return max(0.0, min(1.0, projection))
+        
+        else:
+            dx = norm_x - self.start[0]
+            dy = norm_y - self.start[1]
+            
+            end_dx = self.end[0] - self.start[0]
+            end_dy = self.end[1] - self.start[1]
+            radius = sqrt(end_dx * end_dx + end_dy * end_dy)
+            
+            if radius == 0:
                 return 0.0
             
-            return max(0.0, min(1.0, dot / mag_squared))
-        
-        dx = norm_x - self.start[0]
-        dy = norm_y - self.start[1]
-        
-        radius = sqrt((self.end[0] - self.start[0]) ** 2 + (self.end[1] - self.start[1]) ** 2)
-        
-        if radius == 0:
-            return 0.0
-            
-        return max(0.0, min(1.0, sqrt(dx * dx + dy * dy) / radius))
+            distance = sqrt(dx * dx + dy * dy)
+            return max(0.0, min(1.0, distance / radius))
     
     def at(self, position: float) -> color:
-        """Returns the color at a specific position in the gradient."""
+        position = max(0.0, min(1.0, position))
+        
         if position in self.colors:
             return self.colors[position]
             
@@ -74,13 +86,11 @@ class gradient:
                 start_color = self.colors[start_pos]
                 end_color = self.colors[end_pos]
                 
-                # Avoid division by zero if start_pos and end_pos are identical
                 if end_pos == start_pos:
                     return start_color
                     
                 factor = (position - start_pos) / (end_pos - start_pos)
                 
-                # Linearly interpolate RGB components
                 return color(
                     int(start_color.r + (end_color.r - start_color.r) * factor),
                     int(start_color.g + (end_color.g - start_color.g) * factor),
@@ -90,19 +100,15 @@ class gradient:
         return self.colors[positions[0]] 
     
     def __call__(self, text: str, layer: layers = layers.TEXT) -> str:
-        """Applies the gradient to the given text."""
         if not text:
             return text
             
-        if len(text) == 1:
-            return self.at(0.0)(text, layer)
-            
         lines = text.split('\n')
         max_y = len(lines)
-        max_x = 0
-        for line in lines:
-            if len(line) > max_x:
-                max_x = len(line)
+        max_x = max(len(line) for line in lines) if lines else 0
+        
+        if max_x == 0 or max_y == 0:
+            return text
         
         styled_lines = []
         for y, line in enumerate(lines):
@@ -111,12 +117,7 @@ class gradient:
                 position_factor = self._get_position_factor(x, y, max_x, max_y)
                 char_color = self.at(position_factor)
                 styled_line_chars.append(char_color(char, layer))
-                
-            for x_pad in range(len(line), max_x):
-                position_factor = self._get_position_factor(x_pad, y, max_x, max_y)
-                char_color = self.at(position_factor)
-                styled_line_chars.append(char_color(' ', layer))
 
             styled_lines.append("".join(styled_line_chars))
-            
+        
         return "\n".join(styled_lines)
